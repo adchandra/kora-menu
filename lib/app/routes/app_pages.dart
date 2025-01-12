@@ -37,6 +37,9 @@ class AppPages {
       name: Routes.CONTACT,
       page: () => ContactView(),
     ),
+    GetPage(
+      name: Routes.ADMIN,
+      page: () => AdminView(),
+    ),
   ];
 }
-
