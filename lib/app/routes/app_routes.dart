@@ -18,3 +18,13 @@ abstract class _Paths {
   static const ADMIN = '/admin';
   static const LOGIN = '/login';
 }
+
+// part of 'app_pages.dart';
+
+// class Routes {
+//   static const HOME = '/home';
+//   static const LOGIN = '/login';
+//   static const LIST = '/list';
+//   static const CONTACT = '/contact';
+//   static const ADMIN = '/admin';
+// }

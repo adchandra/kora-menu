@@ -1,83 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:myapp/app/routes/app_pages.dart';
+import 'package:myapp/app/controllers/auth_controller.dart';
+import 'package:myapp/app/modules/login/controllers/login_controller.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
-
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  Future<void> login(BuildContext context) async {
-    final username = usernameController.text;
-    final password = passwordController.text;
-
-    if (username.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Mohon isi username dan password!")),
-      );
-      return;
-    }
-
-    try {
-      // Query Firestore untuk mencari data berdasarkan username dan password
-      final query = await firestore
-          .collection('admin')
-          .where('username', isEqualTo: username)
-          .where('password', isEqualTo: password)
-          .get();
-
-      if (query.docs.isNotEmpty) {
-        // Jika data ditemukan, arahkan ke halaman Admin
-        Get.offAllNamed(Routes.ADMIN);
-      } else {
-        // Jika tidak ditemukan data yang sesuai
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Username atau password salah!")),
-        );
-      }
-    } catch (e) {
-      // Menangani kesalahan umum yang terjadi selama query
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Terjadi kesalahan: $e")),
-      );
-    }
-  }
+class LoginView extends GetView<LoginController> {
+  final cAuth = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => LoginController());
     return Scaffold(
       backgroundColor:
           Colors.red.shade50, // Background warna cerah dengan nuansa merah
       appBar: AppBar(
-        title: const Text("Admin Login"),
-        backgroundColor: Colors.red.shade700, // Warna appBar merah
+        title: const Text('Login Screen'),
+        centerTitle: true,
+        backgroundColor: Colors.red.shade700, // AppBar warna merah
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start, // Rata atas
-          crossAxisAlignment: CrossAxisAlignment.center, // Rata tengah
+        child: ListView(
           children: [
-            // Judul halaman login yang diganti
-            Text(
-              "Silahkan Login Admin", // Mengganti teks
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.red.shade800,
+            SizedBox(height: 50), // Spacing di atas
+            Center(
+              child: Text(
+                'Silahkan Login Admin', // Judul
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red.shade800,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center, // Rata tengah
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 40), // Spacing di bawah judul
 
-            // Username TextField dengan desain yang lebih menarik
+            // Username TextField dengan desain lebih menarik
             TextField(
-              controller: usernameController,
+              controller: controller.cEmail,
               decoration: InputDecoration(
-                labelText: "Username",
+                labelText: "Email",
                 labelStyle: TextStyle(color: Colors.red.shade700),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red.shade300),
@@ -85,13 +47,14 @@ class LoginView extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red.shade600),
                 ),
+                prefixIcon: Icon(Icons.email, color: Colors.red.shade700),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20), // Spacing di antara TextField
 
-            // Password TextField dengan desain yang lebih menarik
+            // Password TextField dengan desain lebih menarik
             TextField(
-              controller: passwordController,
+              controller: controller.cPass,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
@@ -102,13 +65,15 @@ class LoginView extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red.shade600),
                 ),
+                prefixIcon: Icon(Icons.lock, color: Colors.red.shade700),
               ),
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 30), // Spacing di bawah password field
 
-            // Tombol Login dengan desain dan warna keren, rata tengah
+            // Tombol Login dengan desain lebih menarik
             ElevatedButton(
-              onPressed: () => login(context),
+              onPressed: () =>
+                  cAuth.login(controller.cEmail.text, controller.cPass.text),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red.shade700, // Warna tombol merah
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -125,6 +90,7 @@ class LoginView extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10), // Spacing di bawah tombol
           ],
         ),
       ),

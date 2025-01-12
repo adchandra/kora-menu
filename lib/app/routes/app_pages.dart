@@ -24,22 +24,27 @@ class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => HomeView(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginView(),
+      binding: LoginBinding(),
     ),
     GetPage(
       name: Routes.LIST,
       page: () => ListViewPage(),
+      binding: ListBinding(),
     ),
     GetPage(
       name: Routes.CONTACT,
       page: () => ContactView(),
+      binding: ContactBinding(),
     ),
     GetPage(
       name: Routes.ADMIN,
       page: () => AdminView(),
+      binding: AdminBinding(),
     ),
   ];
 }

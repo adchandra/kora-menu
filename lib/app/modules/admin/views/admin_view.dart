@@ -21,13 +21,13 @@ class _AdminViewState extends State<AdminView> {
   final authController = Get.find<AuthController>();
 
   @override
-  void initState() {
-    super.initState();
-    // Redirect to login if not logged in
-    if (!authController.isLoggedIn.value) {
-      Get.offAllNamed(Routes.LOGIN);
-    }
-  }
+  // void initState() {
+  //   super.initState();
+  //   // Redirect to login if not logged in
+  //   if (!authController.isLoggedIn.value) {
+  //     Get.offAllNamed(Routes.LOGIN);
+  //   }
+  // }
 
   // Fungsi untuk mengambil data menu dari Firestore
   Stream<List<Menu>> getMenuList() {

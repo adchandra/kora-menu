@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'E-Katalog',
+      title: 'KORA MENU',
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.HOME, // Set initial route
       getPages: AppPages.routes, // Gunakan rute yang sudah didefinisikan
