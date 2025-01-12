@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "101425979495",
+    "project_id": "koramenu-d4cbd",
+    "storage_bucket": "koramenu-d4cbd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101425979495:android:439122e8e6e8b3acb274c2",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIjPu2sq-9rexp3EhyrCxr1bsX4psRM1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101425979495:android:7b43bd487abcc31eb274c2",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIjPu2sq-9rexp3EhyrCxr1bsX4psRM1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
